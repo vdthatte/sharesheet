@@ -1,0 +1,20 @@
+PODS:
+  - BulletinBoard (5.0.0)
+  - FittedSheets (2.4.2)
+
+DEPENDENCIES:
+  - BulletinBoard
+  - FittedSheets
+
+SPEC REPOS:
+  trunk:
+    - BulletinBoard
+    - FittedSheets
+
+SPEC CHECKSUMS:
+  BulletinBoard: dba77053c2a7b64953f63073f7534165af2edd21
+  FittedSheets: 661408776eb4ff514a31da75b3600bd7222b2b3d
+
+PODFILE CHECKSUM: 21aa658d63171bf6c31f1ba3031394801635460e
+
+COCOAPODS: 1.10.1

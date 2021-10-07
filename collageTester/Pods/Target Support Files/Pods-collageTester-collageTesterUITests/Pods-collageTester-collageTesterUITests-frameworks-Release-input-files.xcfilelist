@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-collageTester-collageTesterUITests/Pods-collageTester-collageTesterUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/BulletinBoard/BLTNBoard.framework
+${BUILT_PRODUCTS_DIR}/FittedSheets/FittedSheets.framework
