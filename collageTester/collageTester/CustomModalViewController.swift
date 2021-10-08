@@ -88,16 +88,44 @@ class CustomModalViewController: UIViewController, UIDocumentInteractionControll
     
     //STORIES
     lazy var storiesButton: UIButton = {
-        let button = UIButton()
-        //button.setTitle("Instagram stories", for: .normal)
-        button.setTitleColor(UIColor.systemRed, for: .normal)
+        let newImage = UIImage(named: "igLogo") as UIImage?
+        let rzImg = resizeImage(image: newImage!, targetSize: CGSize(width: 100, height: 100))
+        let newButton   = UIButton(type: UIButton.ButtonType.custom) as UIButton
+        //newButton.frame = CGRect(x: 100, y: 100, width: 200, height: 100)
+        newButton.setImage(rzImg, for: .normal)
+        newButton.imageView?.contentMode = .scaleAspectFill
+        //newButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 50, bottom: 10, right: 50)
         
-        let btnImage = UIImage(named: "igLogo")
-        button.setImage(btnImage , for: .normal)
-        
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        return button
+        newButton.addTarget(self, action: #selector(tweetButtonAction), for: .touchUpInside)
+        newButton.adjustsImageWhenHighlighted = false
+        return newButton
     }()
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(origin: .zero, size: newSize)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
     
     @objc func buttonAction(sender: UIButton!) {
         print("Button tapped")
@@ -125,8 +153,6 @@ class CustomModalViewController: UIViewController, UIDocumentInteractionControll
                     
                     guard let imageData = storyBackgroundView.image else {return}
                     
-                    //imgSz.frame = CGRect(x: 1000, y: 0, width: 200, height: 200)
-                    
                     
                     let pasteboardItems: [String: Any] = [
                         "com.instagram.sharedSticker.backgroundImage": imageData,
@@ -152,15 +178,17 @@ class CustomModalViewController: UIViewController, UIDocumentInteractionControll
     
     //iMESSAGE
     lazy var textButton: UIButton = {
-        let button = UIButton()
-        //button.setTitle("Send text", for: .normal)
-        button.setTitleColor(UIColor.systemRed, for: .normal)
+        let newImage = UIImage(named: "textLogo") as UIImage?
+        let rzImg = resizeImage(image: newImage!, targetSize: CGSize(width: 100, height: 100))
+        let newButton   = UIButton(type: UIButton.ButtonType.custom) as UIButton
+        //newButton.frame = CGRect(x: 100, y: 100, width: 200, height: 100)
+        newButton.setImage(rzImg, for: .normal)
+        newButton.imageView?.contentMode = .scaleAspectFill
+        //newButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 50, bottom: 10, right: 50)
         
-        let btnImage = UIImage(named: "textLogo")
-        button.setImage(btnImage , for: .normal)
-        
-        button.addTarget(self, action: #selector(textButtonAction), for: .touchUpInside)
-        return button
+        newButton.addTarget(self, action: #selector(tweetButtonAction), for: .touchUpInside)
+        newButton.adjustsImageWhenHighlighted = false
+        return newButton
     }()
     
     @objc func textButtonAction(sender: UIButton!) {
@@ -204,15 +232,17 @@ class CustomModalViewController: UIViewController, UIDocumentInteractionControll
     
     //TWEET
     lazy var tweetButton: UIButton = {
-        let button = UIButton()
-        //button.setTitle("Tweet", for: .normal)
-        button.setTitleColor(UIColor.systemRed, for: .normal)
+        let newImage = UIImage(named: "tweetLogo") as UIImage?
+        let rzImg = resizeImage(image: newImage!, targetSize: CGSize(width: 100, height: 100))
+        let newButton   = UIButton(type: UIButton.ButtonType.custom) as UIButton
+        //newButton.frame = CGRect(x: 100, y: 100, width: 200, height: 100)
+        newButton.setImage(rzImg, for: .normal)
+        newButton.imageView?.contentMode = .scaleAspectFill
+        //newButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 50, bottom: 10, right: 50)
         
-        let btnImage = UIImage(named: "tweetLogo")
-        button.setImage(btnImage , for: .normal)
-        
-        button.addTarget(self, action: #selector(tweetButtonAction), for: .touchUpInside)
-        return button
+        newButton.addTarget(self, action: #selector(tweetButtonAction), for: .touchUpInside)
+        newButton.adjustsImageWhenHighlighted = false
+        return newButton
     }()
     
     @objc func tweetButtonAction(sender: UIButton!) {
@@ -239,16 +269,19 @@ class CustomModalViewController: UIViewController, UIDocumentInteractionControll
     }()
 
     lazy var contentStackView: UIStackView = {
+        //view.backgroundColor = UIColor.green
         let spacer = UIView()
         let stackView = UIStackView(arrangedSubviews: [storiesButton, tweetButton, textButton, spacer])
         stackView.axis = .horizontal
         stackView.spacing = 12.0
+        stackView.center = containerView.center
         return stackView
     }()
     
     func setupConstraints() {
         // Information
         containerView.addSubview(contentStackView)
+        
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         // ..
         NSLayoutConstraint.activate([
@@ -286,6 +319,8 @@ class CustomModalViewController: UIViewController, UIDocumentInteractionControll
         // Activate constraints
         containerViewHeightConstraint?.isActive = true
         containerViewBottomConstraint?.isActive = true
+        
+//        stackView.center = containerView.center
     }
     
 }
