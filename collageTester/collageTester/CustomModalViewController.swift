@@ -96,7 +96,7 @@ class CustomModalViewController: UIViewController, UIDocumentInteractionControll
         newButton.imageView?.contentMode = .scaleAspectFill
         //newButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 50, bottom: 10, right: 50)
         
-        newButton.addTarget(self, action: #selector(tweetButtonAction), for: .touchUpInside)
+        newButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         newButton.adjustsImageWhenHighlighted = false
         return newButton
     }()
@@ -186,7 +186,7 @@ class CustomModalViewController: UIViewController, UIDocumentInteractionControll
         newButton.imageView?.contentMode = .scaleAspectFill
         //newButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 50, bottom: 10, right: 50)
         
-        newButton.addTarget(self, action: #selector(tweetButtonAction), for: .touchUpInside)
+        newButton.addTarget(self, action: #selector(textButtonAction), for: .touchUpInside)
         newButton.adjustsImageWhenHighlighted = false
         return newButton
     }()
