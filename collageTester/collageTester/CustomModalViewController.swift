@@ -111,15 +111,19 @@ class CustomModalViewController: UIViewController, UIDocumentInteractionControll
                     //guard let image = UIImage(named: "backgroundxx.png") else {return}
                     //guard let imageData = image.pngData() else {return}
                     
-                    let newView = UIImageView()
+                    
+                     let instagramCanvasBoundsHeight = UIScreen.main.bounds.width * 16/9
+                     let storyBackgroundView = UIImageView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: instagramCanvasBoundsHeight))
+                     
+                    //let newView = UIImageView()
                     
                     //let imgSz = UIImageView(frame: UIScreen.main.bounds)
                     //let imgSz = UIImageView(frame: CGRect(x: 100, y: 0, width: 200, height: 200))
-                    newView.image = UIImage(named: "backgroundxx.png")
+                    storyBackgroundView.image = UIImage(named: "backgroundxx.png")
                     
 
                     
-                    guard let imageData = newView.image else {return}
+                    guard let imageData = storyBackgroundView.image else {return}
                     
                     //imgSz.frame = CGRect(x: 1000, y: 0, width: 200, height: 200)
                     
